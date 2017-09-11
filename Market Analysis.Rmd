@@ -1,0 +1,152 @@
+---
+title: "Market"
+output: html_document
+---
+```{r}
+rm(list = ls(all=TRUE))
+```
+
+
+```{r}
+setwd("F:\\FD\\Info\\Intern")
+```
+
+```{r}
+market <- read.csv("Bank Market .csv",header = TRUE,sep = ",",na.strings = "NA")
+
+```
+
+```{r}
+head(market)
+tail(market)
+```
+
+```{r}
+summary(market)
+```
+
+```{r}
+sum(is.na(market))
+```
+
+```{r}
+str(market)
+```
+
+```{r}
+sapply(market, class)
+levels(market$housing)
+```
+
+```{r}
+#as.numeric function to convert the change the factor values to numeric
+market$age <- as.numeric(market$age)
+market$duration <- as.numeric(market$duration)
+market$campaign <- as.numeric(market$campaign)
+market$pdays <- as.numeric(market$pdays)
+market$previous <- as.numeric(market$previous)
+market$emp.var.rate <- as.numeric(market$emp.var.rate)
+market$cons.price.idx <- as.numeric(market$cons.price.idx)
+market$cons.conf.idx <- as.numeric(market$cons.conf.idx)
+market$euribor3m <- as.numeric(market$euribor3m)
+market$nr.employed <- as.numeric(market$nr.employed)
+
+summary(market)
+```
+
+```{r}
+hist(market$age, col = "light blue", freq = FALSE)
+```
+
+
+```{r}
+## Removing Constant Variables and checking Non-Zero Variance in the data and removing
+library(caret)
+library(DMwR)
+library(lda)
+library(MASS)
+cd <- lda(y~.,data = market)
+cd
+```
+
+```{r}
+library(ggplot2)
+hist(market$duration,col = "green")
+hist(market$campaign)
+table(market$y)
+
+## Class Imbalance 
+
+```
+
+```{r}
+mean(market$age)
+median(market$age)
+sd(market$age)
+min(market$age)
+max(market$age)
+sum(is.na(market$age))
+```
+
+```{r}
+mean(market$duration)
+median(market$duration)
+sd(market$duration)
+min(market$duration)
+max(market$duration)
+
+```
+
+```{r}
+mean(market$campaign)
+median(market$campaign)
+sd(market$campaign)
+min(market$campaign)
+max(market$campaign)
+```
+
+```{r}
+mean(market$pdays)
+median(market$pdays)
+sd(market$pdays)
+min(market$pdays)
+max(market$pdays)
+
+```
+
+```{r}
+mean(market$previous)
+median(market$previous)
+sd(market$previous)
+min(market$previous)
+max(market$previous)
+```
+
+```{r}
+mean(market$cons.price.idx)
+median(market$cons.conf.idx)
+sd(market$cons.conf.idx)
+min(market$cons.conf.idx)
+max(market$cons.conf.idx)
+str(market)
+```
+
+
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
